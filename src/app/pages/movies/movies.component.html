@@ -1,0 +1,18 @@
+<div class="mb-6">
+  <h1 class="text-3xl font-bold mb-4">Trending Movies</h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    @for (movie of movies; track movie.id) {
+    <app-media-card
+      [media]="movie"
+      [imageBaseUrl]="imageBaseUrl"
+      (cardClick)="navigateToDetails($event)"
+    >
+    </app-media-card>
+    } @empty {
+    <div class="col-span-4 py-8 text-center">
+      <p class="text-xl text-slate-500">Loading movies...</p>
+    </div>
+    }
+  </div>
+</div>

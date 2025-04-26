@@ -1,0 +1,145 @@
+<div class="container mx-auto p-4">
+  @if (loading) {
+  <div class="flex justify-center items-center py-20">
+    <div class="text-2xl">Loading movie details...</div>
+  </div>
+  } @if (error) {
+  <div
+    class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6"
+  >
+    <strong class="font-bold">Error!</strong>
+    <span class="block sm:inline"> {{ error }}</span>
+  </div>
+  <button
+    pButton
+    label="Go Back"
+    icon="pi pi-arrow-left"
+    (click)="goBack()"
+    class="p-button-primary"
+  ></button>
+  } @if (movie && !loading && !error) {
+  <button
+    pButton
+    label="Go Back"
+    icon="pi pi-arrow-left"
+    (click)="goBack()"
+    class="mb-6 p-button-outlined"
+  ></button>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div class="md:col-span-1">
+      @if (movie.poster_path) {
+      <img
+        [src]="imageBaseUrl + movie.poster_path"
+        [alt]="movie.title + ' Poster'"
+        class="w-full rounded-lg shadow-lg transition hover:shadow-xl"
+      />
+      } @else {
+      <div
+        class="w-full aspect-[2/3] bg-slate-200 flex items-center justify-center rounded-lg"
+      >
+        <span class="text-slate-500 flex flex-col items-center">
+          <i class="pi pi-image text-3xl mb-2"></i>
+          <span>No Poster Available</span>
+        </span>
+      </div>
+      }
+    </div>
+    <div class="md:col-span-2">
+      <h1 class="text-3xl font-bold mb-2">{{ movie.title }}</h1>
+      <p class="text-gray-500 mb-4 italic">{{ movie.tagline }}</p>
+      <div class="flex flex-wrap gap-4 mb-6">
+        @if (movie.vote_average) {
+        <p-tag
+          severity="info"
+          [value]="movie.vote_average + ' / 10'"
+          icon="pi pi-star"
+        ></p-tag>
+        } @if (movie.release_date) {
+        <p-tag
+          [value]="(movie.release_date | date : 'mediumDate') || ''"
+          icon="pi pi-calendar"
+        ></p-tag>
+        } @if (movie.runtime) {
+        <p-tag [value]="movie.runtime + ' min'" icon="pi pi-clock"></p-tag>
+        }
+      </div>
+      <h2 class="text-xl font-bold mb-2 flex items-center">
+        <i class="pi pi-info-circle mr-2 text-blue-500"></i>Overview
+      </h2>
+      <p class="mb-6 leading-relaxed">{{ movie.overview }}</p>
+      <h2 class="text-xl font-bold mb-2 flex items-center">
+        <i class="pi pi-tag mr-2 text-blue-500"></i>Genres
+      </h2>
+      <div class="flex flex-wrap gap-2 mb-6">
+        @for (genre of movie.genres; track genre.id) {
+        <p-tag styleClass="mr-2 mb-2" [value]="genre.name"></p-tag>
+        }
+      </div>
+      <p-tabView>
+        <p-tabPanel header="Production">
+          <div class="p-2">
+            <h3 class="font-bold mb-2 flex items-center">
+              <i class="pi pi-building mr-2 text-indigo-500"></i>Production
+              Companies
+            </h3>
+            <ul class="list-disc pl-5 mb-4">
+              @for (company of movie.production_companies; track company.id) {
+              <li>{{ company.name }}</li>
+              }
+            </ul>
+
+            <h3 class="font-bold mb-2 flex items-center">
+              <i class="pi pi-globe mr-2 text-indigo-500"></i>Production
+              Countries
+            </h3>
+            <ul class="list-disc pl-5">
+              @for (country of movie.production_countries; track
+              country.iso_3166_1) {
+              <li>{{ country.name }}</li>
+              }
+            </ul>
+          </div>
+        </p-tabPanel>
+        <p-tabPanel header="Details">
+          <div class="p-2">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <p class="mb-2">
+                  <span class="font-bold">Status:</span> {{ movie.status }}
+                </p>
+                <p class="mb-2">
+                  <span class="font-bold">Budget:</span>
+                  {{
+                    movie.budget > 0
+                      ? "$" + (movie.budget | number : "1.0-0")
+                      : "Not Available"
+                  }}
+                </p>
+                <p class="mb-2">
+                  <span class="font-bold">Revenue:</span>
+                  {{
+                    movie.revenue > 0
+                      ? "$" + (movie.revenue | number : "1.0-0")
+                      : "Not Available"
+                  }}
+                </p>
+              </div>
+              <div>
+                <p class="mb-2">
+                  <span class="font-bold">Original Language:</span>
+                  {{ movie.original_language }}
+                </p>
+                <p class="mb-2">
+                  <span class="font-bold">Popularity:</span>
+                  {{ movie.popularity | number : "1.1-1" }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </p-tabPanel>
+      </p-tabView>
+    </div>
+  </div>
+  }
+</div>

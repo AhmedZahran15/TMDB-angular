@@ -76,8 +76,8 @@
         <p-tag styleClass="mr-2 mb-2" [value]="genre.name"></p-tag>
         }
       </div>
-      <p-tabView>
-        <p-tabPanel header="Production">
+      <p-tabs>
+        <p-tabpanel header="Production">
           <div class="p-2">
             <h3 class="font-bold mb-2 flex items-center">
               <i class="pi pi-building mr-2 text-indigo-500"></i>Production
@@ -100,8 +100,8 @@
               }
             </ul>
           </div>
-        </p-tabPanel>
-        <p-tabPanel header="Details">
+        </p-tabpanel>
+        <p-tabpanel header="Details">
           <div class="p-2">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
@@ -137,8 +137,8 @@
               </div>
             </div>
           </div>
-        </p-tabPanel>
-      </p-tabView>
+        </p-tabpanel>
+      </p-tabs>
     </div>
   </div>
   }

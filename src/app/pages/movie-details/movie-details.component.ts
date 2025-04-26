@@ -3,14 +3,21 @@ import { ActivatedRoute } from '@angular/router';
 import { DatePipe, DecimalPipe, Location } from '@angular/common';
 import { TmdbService } from '../../tmdb.service';
 import { CardModule } from 'primeng/card';
-import { TabViewModule } from 'primeng/tabview';
+import { TabsModule } from 'primeng/tabs';
 import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
 import { MovieDetails } from '../../interfaces/movie-details';
 
 @Component({
   selector: 'app-movie-details',
-  imports: [CardModule, TabViewModule, ButtonModule, TagModule, DecimalPipe,DatePipe],
+  imports: [
+    CardModule,
+    TabsModule,
+    ButtonModule,
+    TagModule,
+    DecimalPipe,
+    DatePipe,
+  ],
   templateUrl: './movie-details.component.html',
   styleUrls: ['./movie-details.component.css'],
 })

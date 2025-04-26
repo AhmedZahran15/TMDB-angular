@@ -1,0 +1,61 @@
+<p-card styleClass="h-full flex flex-col cursor-pointer" (click)="onClick()">
+  @if (person?.profile_path) {
+  <img
+    [src]="imageBaseUrl + person.profile_path"
+    [alt]="person.name + ' Profile'"
+    class="w-full h-72 object-fill object-top"
+  />
+  } @else {
+  <div
+    class="w-full h-64 bg-slate-100 flex flex-col items-center justify-center text-slate-400"
+  >
+    <i class="pi pi-user text-2xl mb-2"></i>
+    <span>No Image Available</span>
+  </div>
+  }
+
+  <div class="flex flex-col h-full p-4">
+    <div class="flex items-center justify-between mb-2">
+      <p-tag value="Person" [severity]="'secondary'" [rounded]="true"></p-tag>
+
+      @if (person.popularity) {
+      <p-tag
+        [value]="(person.popularity | number : '1.1-1') || ''"
+        [severity]="popularityClass"
+        [rounded]="true"
+      >
+        <i class="pi pi-chart-line mr-1.5"></i>
+      </p-tag>
+      }
+    </div>
+
+    <h3
+      class="text-lg w-fit pr-2 font-semibold mb-2 overflow-hidden line-clamp-1"
+      [pTooltip]="person.name"
+    >
+      {{ person.name }}
+    </h3>
+
+    @if (person.known_for_department) {
+    <div class="flex items-center mb-3 text-sm">
+      <i class="pi pi-briefcase text-indigo-500 mr-2"></i>
+      <span>{{ person.known_for_department }}</span>
+    </div>
+    } @if (person.known_for?.length > 0) {
+    <div class="text-sm text-slate-600 mb-auto">
+      <p class="font-medium mb-1 flex items-center">
+        <i class="pi pi-star text-amber-500 mr-2"></i>
+        <span>Known for:</span>
+      </p>
+      <ul class="list-none p-0 m-0">
+        @for (work of person.known_for.slice(0, 2); track work.id) {
+        <li class="flex items-center py-0.5">
+          <i class="pi pi-chevron-right text-xs mr-1.5 text-slate-400"></i>
+          {{ work.title || work.name }}
+        </li>
+        }
+      </ul>
+    </div>
+    }
+  </div>
+</p-card>

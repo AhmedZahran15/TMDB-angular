@@ -3,8 +3,7 @@
   <div class="flex justify-center items-center py-20">
     <div class="text-2xl">Loading TV show details...</div>
   </div>
-  }
-  @if (error) {
+  } @if (error) {
   <div
     class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6"
   >
@@ -18,8 +17,7 @@
     (click)="goBack()"
     class="p-button-primary"
   ></button>
-  }
-  @if (tvShow && !loading && !error) {
+  } @if (tvShow && !loading && !error) {
   <button
     pButton
     label="Go Back"
@@ -29,7 +27,7 @@
   ></button>
 
   <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-\    <div class="md:col-span-1">
+    <div class="md:col-span-1">
       @if (tvShow.poster_path) {
       <img
         [src]="imageBaseUrl + tvShow.poster_path"
@@ -96,8 +94,8 @@
         <p-tag styleClass="mr-2 mb-2" [value]="genre.name"></p-tag>
         }
       </div>
-      <p-tabView>
-        <p-tabPanel header="Seasons">
+      <p-tabs>
+        <p-tabpanel header="Seasons">
           <div class="p-2">
             <div class="mb-4">
               <p class="mb-2">
@@ -130,8 +128,8 @@
               }
             </div>
           </div>
-        </p-tabPanel>
-        <p-tabPanel header="Production">
+        </p-tabpanel>
+        <p-tabpanel header="Production">
           <div class="p-2">
             <h3 class="font-bold mb-2 flex items-center">
               <i class="pi pi-desktop mr-2 text-indigo-500"></i>Networks
@@ -161,8 +159,8 @@
               }
             </ul>
           </div>
-        </p-tabPanel>
-        <p-tabPanel header="Details">
+        </p-tabpanel>
+        <p-tabpanel header="Details">
           <div class="p-2">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
@@ -181,13 +179,13 @@
                 </p>
                 <p class="mb-2">
                   <span class="font-bold">Origin Country:</span>
-                  {{ tvShow.origin_country?.join(", ") || "Not Available" }}
+                  {{ tvShow.origin_country.join(", ") || "Not Available" }}
                 </p>
               </div>
             </div>
           </div>
-        </p-tabPanel>
-      </p-tabView>
+        </p-tabpanel>
+      </p-tabs>
     </div>
   </div>
   }

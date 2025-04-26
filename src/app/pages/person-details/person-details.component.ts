@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { DatePipe, DecimalPipe, Location } from '@angular/common';
 import { TmdbService } from '../../tmdb.service';
 import { CardModule } from 'primeng/card';

@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TmdbService } from '../../tmdb.service';
 import { MediaCardComponent } from '../../components/media-card/media-card.component';
+import { Movie } from '../../interfaces/movie';
 
 @Component({
   selector: 'app-movies',
@@ -10,17 +11,24 @@ import { MediaCardComponent } from '../../components/media-card/media-card.compo
   styleUrl: './movies.component.css',
 })
 export class MoviesComponent implements OnInit {
-  movies: any[] = [];
+  movies!: Movie[];
   imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
   tmdbService = inject(TmdbService);
   router = inject(Router);
   ngOnInit(): void {
-    this.tmdbService.getTrendingMovies().subscribe((data: any) => {
-      this.movies = data.results;
+    this.getMovies();
+  }
+  getMovies() {
+    this.tmdbService.getTrendingMovies().subscribe({
+      next: (data) => {
+        this.movies = data.results;
+      },
+      error: (error) => {
+        console.error('Error fetching movies:', error);
+      },
     });
   }
-
-  navigateToDetails(movie: any): void {
+  navigateToDetails(movie: Movie): void {
     this.router.navigate(['/movie', movie.id]);
   }
 }

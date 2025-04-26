@@ -3,7 +3,7 @@
   <img
     [src]="imageBaseUrl + media.poster_path"
     [alt]="title + ' Poster'"
-    class="w-full h-64 object-cover"
+    class="w-full h-64 object-fill object-top"
   />
   } @else {
   <div
@@ -31,7 +31,7 @@
     </div>
 
     <h3
-      class="text-lg font-semibold mb-2 overflow-hidden line-clamp-2"
+      class="text-lg pr-2 w-fit font-semibold mb-2 overflow-hidden line-clamp-1"
       [pTooltip]="title"
     >
       {{ title }}

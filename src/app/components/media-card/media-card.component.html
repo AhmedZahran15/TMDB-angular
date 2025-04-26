@@ -1,0 +1,51 @@
+<p-card styleClass="h-full flex flex-col cursor-pointer" (click)="onClick()">
+  @if (media?.poster_path) {
+  <img
+    [src]="imageBaseUrl + media.poster_path"
+    [alt]="title + ' Poster'"
+    class="w-full h-64 object-cover"
+  />
+  } @else {
+  <div
+    class="w-full h-64 bg-slate-100 flex flex-col items-center justify-center text-slate-400"
+  >
+    <i class="pi pi-image text-2xl mb-2"></i>
+    <span>No Image Available</span>
+  </div>
+  }
+
+  <div class="flex flex-col h-full p-4">
+    <div class="flex items-center justify-between mb-2">
+      <p-tag
+        [value]="mediaType"
+        [severity]="mediaType === 'Movie' ? 'info' : 'success'"
+        [rounded]="true"
+      ></p-tag>
+
+      @if (releaseDate) {
+      <p-tag severity="info" [rounded]="true">
+        <i class="pi pi-calendar mr-1.5"></i>
+        {{ releaseDate | date : "mediumDate" }}
+      </p-tag>
+      }
+    </div>
+
+    <h3
+      class="text-lg font-semibold mb-2 overflow-hidden line-clamp-2"
+      [pTooltip]="title"
+    >
+      {{ title }}
+    </h3>
+
+    <p-rating
+      [(ngModel)]="starRating"
+      [readonly]="true"
+      [stars]="5"
+      class="mb-3 block"
+    ></p-rating>
+
+    <p class="text-sm text-slate-600 mb-auto overflow-hidden line-clamp-3">
+      {{ media?.overview }}
+    </p>
+  </div>
+</p-card>

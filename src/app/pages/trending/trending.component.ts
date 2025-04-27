@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { TmdbService } from '../../tmdb.service';
+import { TmdbService } from '../../services/tmdb.service';
 import { MediaCardComponent } from '../../components/media-card/media-card.component';
 import { PersonCardComponent } from '../../components/person-card/person-card.component';
 import { Movie } from '../../interfaces/movie';
